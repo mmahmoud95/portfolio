@@ -105,7 +105,7 @@ export const useFetch = () => {
     try {
       setLoading(true);
       await fetch(
-        'https://formsubmit.co/ajax/mustafa.mahmoud.za@gmail.coms',
+        'https://formsubmit.co/ajax/mustafa.mahmoud.za@gmail.com',
         {
           method: 'POST',
           headers: {
