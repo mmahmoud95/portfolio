@@ -12,7 +12,7 @@ const Hero = () => {
             className="md:px-20 px-6 py-24 flex flex-col lg:flex-row lg:text-left items-center justify-between xl:gap-40 gap-4 sm:gap-4"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 1 }}
+            transition={{ duration: 0 }}
         >
             <motion.div className="order-1 lg:-order-1">
                 {/* Text Section */}
