@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { FaBriefcase, FaFileDownload, FaWhatsapp } from 'react-icons/fa';
 
 const Hero = () => {
+    const mustafaCv = '/Mustafa_Mahmoud_CV.pdf';
     return (
         <motion.div
             className="md:px-20 px-6 py-24 flex flex-col lg:flex-row lg:text-left items-center justify-between xl:gap-40 gap-4 sm:gap-4"
@@ -30,7 +31,7 @@ const Hero = () => {
                         Mustafa Mahmoud
                     </span>
                     <span className="block">
-                        Full Stack Web Developer.
+                        Full Stack Developer.
                         <br />
                         <span className="font-light md:text-xl mt-2 inline-block text-base">
                             I build high-performance web applications that meet
@@ -70,7 +71,7 @@ const Hero = () => {
 
                     {/* Download CV Button */}
                     <Link
-                        href="/"
+                        href={mustafaCv}
                         download={true}
                         target="_blank"
                         rel="noopener noreferrer"

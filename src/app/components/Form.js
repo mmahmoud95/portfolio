@@ -2,7 +2,7 @@
 import { useRouter } from 'next/navigation';
 import React from 'react';
 import { motion } from 'framer-motion';
-import { useFetch } from '../utils/constants';
+import { useFetch } from '../hook/useFetch';
 
 const Form = () => {
     const router = useRouter();
