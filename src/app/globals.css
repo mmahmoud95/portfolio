@@ -1,0 +1,106 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    --background: #ffffff;
+    --foreground: #171717;
+    --font-dm-sans: 'DM Sans', sans-serif;
+    --font-poppins: 'Poppins', sans-serif;
+    --solid-heading: #42446e;
+    --dark-content: #666;
+    --solid-heading-dark-mode: #ccc;
+    --light-content: #a7a7a7;
+    --dark-mode: #191919;
+    --button-text: #018c0f;
+    --button-success: #d7ffe0;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --background: #0a0a0a;
+        --foreground: #ededed;
+    }
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    color: var(--foreground);
+    background: var(--background);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.poppins {
+    font-family: var(--font-poppins);
+}
+.dm-sans {
+    font-family: var(--font-dm-sans);
+}
+.solid-heading {
+    color: var(--solid-heading);
+}
+
+.border-gradient-container {
+    display: inline-block; /* للتأكد من عدم أخذ مساحة إضافية */
+    border-radius: 50%; /* يجعل الحواف دائرية */
+    padding: 9px; /* عرض الإطار */
+    background: linear-gradient(to top, #00c0fd, #e70faa); /* gradient */
+    width: 250px;
+    height: 250px;
+}
+
+.profile-image {
+    display: block;
+    width: 100%; /* Ensure the image fills the container */
+    height: 100%; /* Ensure the image fills the container */
+    object-fit: cover; /* Ensures the image scales and crops correctly */
+    border-radius: 50%; /* Makes the image circular */
+    /* filter: grayscale(100); */
+}
+/* .profile-image:hover {
+    filter: grayscale(0);
+} */
+.dark-content {
+    color: var(--dark-content);
+}
+
+@media screen and (min-width: 1024px) {
+    .border-gradient-container {
+        width: 350px;
+        height: 350px;
+    }
+}
+@media screen and (min-width: 1280px) {
+    .border-gradient-container {
+        width: 400px;
+        height: 400px;
+    }
+}
+
+.loader-container {
+    padding: 6px 0;
+}
+
+.loader {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: block;
+    margin: 0 auto;
+    position: relative;
+    background: #fff;
+    box-sizing: border-box;
+    animation: shadowExpandX 1s linear infinite alternate;
+}
+
+@keyframes shadowExpandX {
+    0% {
+        box-shadow: 0 0, 0 0;
+        color: rgba(255, 255, 255, 0.2);
+    }
+    100% {
+        box-shadow: -24px 0, 24px 0;
+        color: rgba(255, 255, 255, 0.8);
+    }
+}
