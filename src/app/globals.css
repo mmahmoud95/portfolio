@@ -1,7 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+@layer utilities {
+    .solid-heading-dark-mode {
+        --tw-text-opacity: 1;
+        color: rgb(var(--solid-heading-dark-mode) / var(--tw-text-opacity, 1))
+            /* #ddd6fe */;
+    }
+}
 :root {
     --background: #ffffff;
     --foreground: #171717;
@@ -9,7 +15,7 @@
     --font-poppins: 'Poppins', sans-serif;
     --solid-heading: #42446e;
     --dark-content: #666;
-    --solid-heading-dark-mode: #ccc;
+    --solid-heading-dark-mode: #6568a8;
     --light-content: #a7a7a7;
     --dark-mode: #191919;
     --button-text: #018c0f;
@@ -39,6 +45,12 @@ body {
 }
 .solid-heading {
     color: var(--solid-heading);
+}
+
+.solid-heading-dark-mode {
+    --tw-text-opacity: 1;
+    color: rgb(var(--solid-heading-dark-mode) / var(--tw-text-opacity, 1))
+        /* #ddd6fe */;
 }
 
 .border-gradient-container {

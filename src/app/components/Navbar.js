@@ -4,6 +4,9 @@ import React from 'react';
 import { FaGithub, FaLinkedin, FaWhatsapp } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 const Navbar = () => {
+    const toggleTheme = () => {
+        document.documentElement.classList.toggle('dark')
+    }
     return (
         <motion.nav
             className="flex items-center justify-between py-2 px-6 lg:px-24 bg-white shadow-md"
@@ -78,6 +81,7 @@ const Navbar = () => {
                         >
                             <FaWhatsapp />
                         </Link>
+                        <button onClick={toggleTheme}>dark</button>
                     </motion.div>
                 </div>
             </motion.div>

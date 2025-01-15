@@ -37,13 +37,15 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body
-        className={`${dm_Sans.variable} ${poppins.variable}  mx-auto`}
-      >
-        <Navbar />
-        {children}
-        <Footer />
-      </body>
+      <Suspense fallback={<div>Load</div>}>
+
+        <body
+          className={`${dm_Sans.variable} ${poppins.variable}  mx-auto bg-white dark:bg-slate-950`}
+        >
+          <Navbar />
+          {children}
+          <Footer />
+        </body></Suspense >
     </html>
   );
 }
