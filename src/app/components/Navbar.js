@@ -81,7 +81,7 @@ const Navbar = () => {
                         >
                             <FaWhatsapp />
                         </Link>
-                        <button onClick={toggleTheme}>dark</button>
+                        {/* <button onClick={toggleTheme}>dark</button> */}
                     </motion.div>
                 </div>
             </motion.div>
