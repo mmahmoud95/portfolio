@@ -41,7 +41,7 @@ const Footer = () => {
                         >
                             <FaEnvelope size={24} />
                         </Link><Link
-                            href="https://github.com"
+                            href="https://github.com/mmahmoud95"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="hover:text-blue-400 transition-colors"
