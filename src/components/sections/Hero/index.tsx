@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowRight, Download, Mail } from "lucide-react";
-import { FaGithub, FaLinkedin } from "react-icons/fa";
+import { FaGithub, FaLinkedin, FaWhatsapp } from "react-icons/fa";
 import { fadeInUp, staggerContainer } from "@/lib/animations";
 import { HeroBackground } from "./HeroBackground";
 
@@ -97,13 +97,6 @@ export function Hero() {
                 <Download size={15} />
                 Resume
               </a>
-              <button
-                onClick={() => scrollTo("contact")}
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-[var(--color-glass-border)] text-[var(--color-text-muted)] font-medium text-sm hover:border-violet-400/40 hover:text-[var(--color-text)] hover:bg-[rgba(139,92,246,0.06)] active:scale-95 transition-all backdrop-blur-sm"
-              >
-                <Mail size={15} />
-                Contact
-              </button>
             </motion.div>
 
             {/* Social row */}
@@ -129,6 +122,15 @@ export function Hero() {
               >
                 <FaLinkedin size={17} />
                 <span>LinkedIn</span>
+              </a>
+              <a
+                href="https://wa.me/201152910495"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 text-sm text-[var(--color-text-muted)] hover:text-[#25d366] transition-colors"
+              >
+                <FaWhatsapp size={17} />
+                <span>WhatsApp</span>
               </a>
             </motion.div>
           </motion.div>
@@ -156,7 +158,6 @@ export function Hero() {
                     fill
                     className="object-cover"
                     priority
-                    sizes="280px"
                   />
                   {/* Subtle bottom fade */}
                   <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-bg)]/30 via-transparent to-transparent pointer-events-none" />
