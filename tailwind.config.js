@@ -34,6 +34,8 @@ module.exports = {
         "float-slow": "float 9s ease-in-out infinite",
         "pulse-glow": "pulseGlow 2.5s ease-in-out infinite",
         "spin-slow": "spin 12s linear infinite",
+        marquee: "marquee 30s linear infinite",
+        "ping-slow": "ping 2.5s cubic-bezier(0,0,0.2,1) infinite",
       },
       keyframes: {
         float: {
