@@ -1,51 +1,49 @@
-import localFont from "next/font/local";
-import { DM_Sans } from 'next/font/google'
-import { Poppins } from "next/font/google";
-import "./globals.css";
-import Navbar from "./components/Navbar";
-import { Suspense } from "react";
-import Footer from "./components/Footer";
+import { JetBrains_Mono, Inter, Space_Grotesk } from 'next/font/google';
+import './globals.css';
+import Navbar from './components/Navbar';
+import Footer from './components/Footer';
+import { ThemeProvider } from './components/ThemeProvider';
 
+const mono = JetBrains_Mono({
+    subsets: ['latin'],
+    variable: '--font-mono',
+    display: 'swap',
+});
+const sans = Inter({
+    subsets: ['latin'],
+    variable: '--font-sans',
+    display: 'swap',
+});
+const display = Space_Grotesk({
+    subsets: ['latin'],
+    variable: '--font-display',
+    display: 'swap',
+});
 
-// const geistSans = localFont({
-//   src: "./fonts/GeistVF.woff",
-//   variable: "--font-geist-sans",
-//   weight: "100 900",
-// });
-// const geistMono = localFont({
-//   src: "./fonts/GeistMonoVF.woff",
-//   variable: "--font-geist-mono",
-//   weight: "100 900",
-// });
-const poppins = Poppins({
-  subsets: ['latin'],
-  variable: '--font-poppins',
-  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
-  display: 'swap',
-})
-const dm_Sans = DM_Sans({
-  subsets: ['latin'],
-  variable: '--font-dm-sans',
-  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
-  display: 'swap',
-})
 export const metadata = {
-  title: "Mustafa Mahmoud",
-  description: "Full Stack Developer | MERN Stack Developer | Frontend Developer",
+    title: 'Mustafa Mahmoud — Front-end Developer',
+    description:
+        'Front-end Developer specializing in React & Next.js, building high-performance, real-time web interfaces. Based in Cairo, Egypt.',
 };
 
-export default function RootLayout({ children }) {
-  return (
-    <html lang="en">
-      <Suspense fallback={<div>Load</div>}>
+// Runs before paint to set the theme class, preventing a light/dark flash.
+const themeScript = `(function(){try{var t=localStorage.getItem('theme');var d=t!=='light';document.documentElement.classList.toggle('dark',d);}catch(e){document.documentElement.classList.add('dark');}})();`;
 
-        <body
-          className={`${dm_Sans.variable} ${poppins.variable}  mx-auto bg-white dark:bg-slate-950`}
-        >
-          <Navbar />
-          {children}
-          <Footer />
-        </body></Suspense >
-    </html>
-  );
+export default function RootLayout({ children }) {
+    return (
+        <html lang="en" className="dark" suppressHydrationWarning>
+            <head>
+                <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+            </head>
+            <body
+                className={`${mono.variable} ${sans.variable} ${display.variable} font-sans bg-bg text-content`}
+            >
+                <ThemeProvider>
+                    <Navbar />
+                    <main>{children}</main>
+                    <Footer />
+                </ThemeProvider>
+            </body>
+        </html>
+    );
 }

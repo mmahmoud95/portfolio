@@ -1,91 +1,109 @@
 'use client';
+import { useState } from 'react';
 import Link from 'next/link';
-import React from 'react';
-import { FaGithub, FaLinkedin, FaWhatsapp } from 'react-icons/fa';
-import { motion } from 'framer-motion';
-const Navbar = () => {
-    const toggleTheme = () => {
-        document.documentElement.classList.toggle('dark')
-    }
-    return (
-        <motion.nav
-            className="flex items-center justify-between py-2 px-6 lg:px-24 bg-white shadow-md"
-            initial={{ opacity: 0, y: -50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, ease: 'easeInOut' }}
-        >
-            {/* Logo */}
-            <motion.div
-                className="flex flex-shrink-0 items-center justify-center text-[#26274b]"
-                whileHover={{ scale: 1.1 }}
-            >
-                <Link
-                    href="/"
-                    className="text-4xl lg:text-6xl font-bold"
-                    aria-label="Home"
-                >
-                    {'<MM />'}
-                </Link>
-            </motion.div>
+import { FaGithub, FaLinkedin } from 'react-icons/fa';
+import { FiSun, FiMoon, FiMenu, FiX } from 'react-icons/fi';
+import { useTheme } from './ThemeProvider';
 
-            {/* Navigation Links */}
-            <motion.div
-                className="lg:flex justify-center items-center gap-12 text-lg text-[#666]"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.2, duration: 0.5 }}
-            >
-                {/* Social Media Links */}
-                <div className="flex gap-4 lg:mt-0">
-                    <motion.div
-                        whileHover={{ scale: 1.2 }}
-                        whileTap={{ scale: 0.9 }}
-                        transition={{ type: 'spring', stiffness: 300 }}
+const LINKS = [
+    { label: 'about', href: '#about' },
+    { label: 'experience', href: '#experience' },
+    { label: 'stack', href: '#stack' },
+    { label: 'projects', href: '#projects' },
+    { label: 'contact', href: '#contact' },
+];
+
+const Navbar = () => {
+    const { theme, toggle } = useTheme();
+    const [open, setOpen] = useState(false);
+
+    return (
+        <header className="nav-blur sticky top-0 z-50 border-b border-line backdrop-blur-md backdrop-saturate-150">
+            <nav className="mx-auto flex max-w-6xl items-center justify-between px-5 py-3 sm:px-8">
+                {/* Logo */}
+                <Link
+                    href="#top"
+                    aria-label="Home"
+                    className="font-mono text-lg font-bold tracking-tight text-content transition-colors hover:text-accent"
+                >
+                    {'<MM/>'}
+                </Link>
+
+                {/* Center path links */}
+                <ul className="hidden items-center gap-7 md:flex">
+                    {LINKS.map((l) => (
+                        <li key={l.href}>
+                            <Link
+                                href={l.href}
+                                className="group font-mono text-sm text-muted transition-colors hover:text-content"
+                            >
+                                <span className="prompt">~/</span>
+                                {l.label}
+                            </Link>
+                        </li>
+                    ))}
+                </ul>
+
+                {/* Right controls */}
+                <div className="flex items-center gap-1.5 sm:gap-2">
+                    <button
+                        onClick={toggle}
+                        aria-label="Toggle color theme"
+                        className="flex h-9 w-9 items-center justify-center rounded-lg border border-line text-muted transition-colors hover:border-accent hover:text-accent"
                     >
-                        <Link
-                            href="https://www.linkedin.com/in/mustafa-mahmoud-za/"
-                            className="text-xl hover:text-[#0077B5]"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            aria-label="LinkedIn"
-                        >
-                            <FaLinkedin />
-                        </Link>
-                    </motion.div>
-                    <motion.div
-                        whileHover={{ scale: 1.2 }}
-                        whileTap={{ scale: 0.9 }}
-                        transition={{ type: 'spring', stiffness: 300 }}
+                        {theme === 'dark' ? (
+                            <FiSun size={16} />
+                        ) : (
+                            <FiMoon size={16} />
+                        )}
+                    </button>
+                    <Link
+                        href="https://www.linkedin.com/in/mustafa-mahmoud-za/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="LinkedIn"
+                        className="hidden h-9 w-9 items-center justify-center rounded-lg border border-line text-muted transition-colors hover:border-accent hover:text-accent sm:flex"
                     >
-                        <Link
-                            href="https://github.com/mmahmoud95"
-                            className="text-xl hover:text-gray-700"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            aria-label="GitHub"
-                        >
-                            <FaGithub />
-                        </Link>
-                    </motion.div>
-                    <motion.div
-                        whileHover={{ scale: 1.2 }}
-                        whileTap={{ scale: 0.9 }}
-                        transition={{ type: 'spring', stiffness: 300 }}
+                        <FaLinkedin size={16} />
+                    </Link>
+                    <Link
+                        href="https://github.com/mmahmoud95"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="GitHub"
+                        className="hidden h-9 w-9 items-center justify-center rounded-lg border border-line text-muted transition-colors hover:border-accent hover:text-accent sm:flex"
                     >
-                        <Link
-                            href="https://api.whatsapp.com/send?phone=201152910495"
-                            className="text-xl hover:text-[#128c7e]"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            aria-label="WhatsApp"
-                        >
-                            <FaWhatsapp />
-                        </Link>
-                        {/* <button onClick={toggleTheme}>dark</button> */}
-                    </motion.div>
+                        <FaGithub size={16} />
+                    </Link>
+                    <button
+                        onClick={() => setOpen((v) => !v)}
+                        aria-label="Toggle menu"
+                        aria-expanded={open}
+                        className="flex h-9 w-9 items-center justify-center rounded-lg border border-line text-muted transition-colors hover:border-accent hover:text-accent md:hidden"
+                    >
+                        {open ? <FiX size={16} /> : <FiMenu size={16} />}
+                    </button>
                 </div>
-            </motion.div>
-        </motion.nav>
+            </nav>
+
+            {/* Mobile dropdown */}
+            {open && (
+                <ul className="flex flex-col gap-1 border-t border-line px-5 py-3 md:hidden">
+                    {LINKS.map((l) => (
+                        <li key={l.href}>
+                            <Link
+                                href={l.href}
+                                onClick={() => setOpen(false)}
+                                className="block rounded-lg px-2 py-2 font-mono text-sm text-muted transition-colors hover:bg-accent-soft hover:text-content"
+                            >
+                                <span className="prompt">~/</span>
+                                {l.label}
+                            </Link>
+                        </li>
+                    ))}
+                </ul>
+            )}
+        </header>
     );
 };
 

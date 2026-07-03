@@ -1,8 +1,33 @@
 'use client';
 import { useRouter } from 'next/navigation';
-import React from 'react';
 import { motion } from 'framer-motion';
+import { FiMail, FiPhone, FiMapPin } from 'react-icons/fi';
 import { useFetch } from '../hook/useFetch';
+import SectionHeading from './SectionHeading';
+
+const DETAILS = [
+    {
+        icon: FiMail,
+        label: 'Email',
+        value: 'mustafa.mahmoud.za@gmail.com',
+        href: 'mailto:mustafa.mahmoud.za@gmail.com',
+    },
+    {
+        icon: FiPhone,
+        label: 'Phone',
+        value: '+20 115 291 0495',
+        href: 'https://api.whatsapp.com/send?phone=201152910495',
+    },
+    {
+        icon: FiMapPin,
+        label: 'Location',
+        value: 'Cairo, Egypt',
+        href: null,
+    },
+];
+
+const inputClass =
+    'w-full rounded-lg border border-line bg-bg px-3.5 py-2.5 text-sm text-content placeholder:text-muted outline-none transition-colors focus:border-accent';
 
 const Form = () => {
     const router = useRouter();
@@ -14,156 +39,147 @@ const Form = () => {
     };
 
     return (
-        <motion.div
+        <section
             id="contact"
-            className="flex items-center flex-col w-full py-24 px-6"
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2, duration: 1 }}
-            viewport={{ once: true }} // Animation triggers only once
+            className="mx-auto max-w-6xl scroll-mt-24 px-5 py-16 sm:px-8 sm:py-20"
         >
-            <motion.h2
-                className="solid-heading text-3xl sm:text-4xl md:text-5xl font-bold poppins text-center mb-4 sm:mb-6 md:mb-8"
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                transition={{ delay: 0.1, duration: 0.5 }}
-                viewport={{ once: true }}
-            >
-                Contact Me
-            </motion.h2>
-            <motion.p
-                className="text-2xl sm:text-3xl text-gray-600 mb-6 sm:mb-12 text-center"
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                transition={{ delay: 0.5, duration: 0.8 }}
-                viewport={{ once: true }}
-            >
-                Let’s make something great together
-            </motion.p>
-            <motion.form
-                className="shadow-lg bg-white rounded-lg p-4 sm:p-6 md:p-8 w-full max-w-xl md:max-w-2xl flex flex-col border border-gray-100"
-                id="contactform"
-                onSubmit={handleSubmit}
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                transition={{ delay: 0.1, duration: 0.8 }}
-                viewport={{ once: true }}
-            >
-                <div className="flex flex-col sm:flex-row gap-4 w-full">
-                    <motion.div
-                        className="flex flex-col w-full"
-                        initial={{ opacity: 0 }}
-                        whileInView={{ opacity: 1 }}
-                        transition={{ delay: 0.5, duration: 0.5 }}
-                        viewport={{ once: true }}
-                    >
-                        <label
-                            htmlFor="name"
-                            className="text-lg font-semibold solid-heading mb-2"
-                        >
-                            Full Name
-                        </label>
-                        <input
-                            disabled={loading}
-                            required
-                            placeholder="Full Name"
-                            name="name"
-                            type="text"
-                            id="name"
-                            className="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
-                        />
-                    </motion.div>
-                    <motion.div
-                        className="flex flex-col w-full"
-                        initial={{ opacity: 0 }}
-                        whileInView={{ opacity: 1 }}
-                        transition={{ delay: 1, duration: 0.5 }}
-                        viewport={{ once: true }}
-                    >
-                        <label
-                            htmlFor="email"
-                            className="text-lg font-semibold solid-heading mb-2"
-                        >
-                            Email
-                        </label>
-                        <input
-                            disabled={loading}
-                            required
-                            placeholder="Email"
-                            name="email"
-                            type="email"
-                            id="email"
-                            className="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
-                        />
-                    </motion.div>
-                </div>
-                <motion.div
-                    className="flex flex-col w-full mt-4"
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    transition={{ delay: 1.2, duration: 0.5 }}
-                    viewport={{ once: true }}
-                >
-                    <label
-                        htmlFor="subject"
-                        className="text-lg font-semibold solid-heading mb-2"
-                    >
-                        Subject
-                    </label>
-                    <input
-                        disabled={loading}
-                        required
-                        placeholder="Your Subject"
-                        name="_subject"
-                        type="text"
-                        id="subject"
-                        className="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
-                    />
-                </motion.div>
-                <motion.div
-                    className="flex flex-col w-full mt-4"
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    transition={{ delay: 1.3, duration: 0.5 }}
-                    viewport={{ once: true }}
-                >
-                    <label
-                        htmlFor="comment"
-                        className="text-lg font-semibold solid-heading mb-2"
-                    >
-                        Your Message
-                    </label>
-                    <textarea
-                        disabled={loading}
-                        required
-                        placeholder="Your message"
-                        name="comment"
-                        id="comment"
-                        rows="5"
-                        className="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
-                    ></textarea>
-                </motion.div>
-                <input name="_formsubmit_id" type="text" className="hidden" />
-                <motion.button
-                    value="Submit"
-                    type="submit"
-                    disabled={loading}
-                    className={`mt-4 bg-blue-500 text-white font-semibold py-2 px-4 rounded-lg hover:bg-blue-600 focus:ring-2 focus:ring-blue-400 transition duration-300 ${loading ? 'cursor-not-allowed' : ''}`}
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    transition={{ delay: 1.3, duration: 0.5 }}
-                    viewport={{ once: true }}
-                >
-                    {loading ? (
-                        <div className='loader-container'>                        <span className="loader"></span>
-                        </div>
-                    ) : (
-                        'Submit'
-                    )}
-                </motion.button>
+            <SectionHeading path="contact" comment="open to opportunities" />
 
-            </motion.form>
-        </motion.div>
+            <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
+                {/* Left: pitch + direct details */}
+                <motion.div
+                    initial={{ opacity: 0, y: 16 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.3 }}
+                    transition={{ duration: 0.5 }}
+                >
+                    <h3 className="font-display text-2xl font-semibold leading-snug text-content sm:text-3xl">
+                        Let&apos;s build something great together
+                    </h3>
+                    <p className="mt-3 max-w-md text-[15px] leading-relaxed text-muted">
+                        Have a role, a project, or an idea in mind? Drop me a
+                        line — I usually reply within a day.
+                    </p>
+
+                    <div className="mt-7 space-y-3">
+                        {DETAILS.map((d) => {
+                            const Row = (
+                                <div className="flex items-center gap-3">
+                                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-line text-accent">
+                                        <d.icon size={16} />
+                                    </span>
+                                    <span className="min-w-0">
+                                        <span className="comment block text-[11px]">
+                                            {d.label}
+                                        </span>
+                                        <span className="block truncate font-mono text-sm text-content">
+                                            {d.value}
+                                        </span>
+                                    </span>
+                                </div>
+                            );
+                            return d.href ? (
+                                <a
+                                    key={d.label}
+                                    href={d.href}
+                                    target={
+                                        d.href.startsWith('http')
+                                            ? '_blank'
+                                            : undefined
+                                    }
+                                    rel="noopener noreferrer"
+                                    className="block rounded-xl p-1 transition-colors hover:bg-accent-soft"
+                                >
+                                    {Row}
+                                </a>
+                            ) : (
+                                <div key={d.label} className="p-1">
+                                    {Row}
+                                </div>
+                            );
+                        })}
+                    </div>
+                </motion.div>
+
+                {/* Right: form */}
+                <motion.form
+                    id="contactform"
+                    onSubmit={handleSubmit}
+                    initial={{ opacity: 0, y: 16 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.2 }}
+                    transition={{ duration: 0.5, delay: 0.1 }}
+                    className="card p-5 sm:p-7"
+                >
+                    <div className="grid gap-4 sm:grid-cols-2">
+                        <label className="flex flex-col gap-1.5">
+                            <span className="comment text-xs">name</span>
+                            <input
+                                disabled={loading}
+                                required
+                                name="name"
+                                type="text"
+                                placeholder="Your name"
+                                className={inputClass}
+                            />
+                        </label>
+                        <label className="flex flex-col gap-1.5">
+                            <span className="comment text-xs">email</span>
+                            <input
+                                disabled={loading}
+                                required
+                                name="email"
+                                type="email"
+                                placeholder="you@example.com"
+                                className={inputClass}
+                            />
+                        </label>
+                    </div>
+
+                    <label className="mt-4 flex flex-col gap-1.5">
+                        <span className="comment text-xs">subject</span>
+                        <input
+                            disabled={loading}
+                            required
+                            name="_subject"
+                            type="text"
+                            placeholder="What's this about?"
+                            className={inputClass}
+                        />
+                    </label>
+
+                    <label className="mt-4 flex flex-col gap-1.5">
+                        <span className="comment text-xs">message</span>
+                        <textarea
+                            disabled={loading}
+                            required
+                            name="comment"
+                            rows="5"
+                            placeholder="Tell me a bit more..."
+                            className={`${inputClass} resize-none`}
+                        />
+                    </label>
+
+                    <input name="_formsubmit_id" type="text" className="hidden" />
+
+                    <button
+                        type="submit"
+                        disabled={loading}
+                        className={`mt-5 inline-flex w-full items-center justify-center rounded-lg bg-accent px-4 py-2.5 font-mono text-sm font-medium text-white transition-opacity hover:opacity-90 sm:w-auto ${
+                            loading ? 'cursor-not-allowed opacity-70' : ''
+                        }`}
+                    >
+                        {loading ? (
+                            <span className="loader-container">
+                                <span className="loader" />
+                            </span>
+                        ) : (
+                            '$ send-message'
+                        )}
+                    </button>
+                </motion.form>
+            </div>
+        </section>
     );
 };
 

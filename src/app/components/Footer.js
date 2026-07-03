@@ -1,65 +1,59 @@
 import Link from 'next/link';
-import React from 'react';
-import { FaGithub, FaLinkedin, FaTwitter, FaEnvelope } from 'react-icons/fa';
-import { FaWhatsapp } from 'react-icons/fa6';
+import { FaGithub, FaLinkedin, FaWhatsapp, FaEnvelope } from 'react-icons/fa';
+
+const SOCIALS = [
+    {
+        icon: FaLinkedin,
+        href: 'https://www.linkedin.com/in/mustafa-mahmoud-za/',
+        label: 'LinkedIn',
+    },
+    {
+        icon: FaGithub,
+        href: 'https://github.com/mmahmoud95',
+        label: 'GitHub',
+    },
+    {
+        icon: FaWhatsapp,
+        href: 'https://api.whatsapp.com/send?phone=201152910495',
+        label: 'WhatsApp',
+    },
+    {
+        icon: FaEnvelope,
+        href: 'mailto:mustafa.mahmoud.za@gmail.com',
+        label: 'Email',
+    },
+];
 
 const Footer = () => {
     return (
-        <footer className="bg-gray-900 text-white py-8 md:px-24 lg:px-64 poppins w-full text-center flex flex-col justify-between">
-            <div className="px-4">
-                <div className="flex md:flex-row justify-between items-center">
-                    <div className="mb-4 md:mb-0">
-                        <h3 className="text-xl font-bold">Mustafa Mahmoud</h3>
-                        <p className="text-gray-400">Full Stack Web Developer</p>
-                    </div>
-
-                    <div className="flex space-x-6">
-
-                        <Link
-                            href="https://api.whatsapp.com/send?phone=201152910495"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="hover:text-[#128c7e] transition-colors"
-                            aria-label="LinkedIn Profile"
-                        >
-                            <FaWhatsapp size={24} />
-                        </Link>
-                        <Link
-                            href="https://www.linkedin.com/in/mustafa-mahmoud-za/"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="hover:text-[#0077B5] transition-colors"
-                            aria-label="LinkedIn Profile"
-                        >
-                            <FaLinkedin size={24} />
-                        </Link>
-
-                        <Link
-                            href="mailto:mustafa.mahmoud.za@gmail.com"
-                            className="hover:text-red-400 transition-colors"
-                            aria-label="Email Contact"
-                        >
-                            <FaEnvelope size={24} />
-                        </Link><Link
-                            href="https://github.com/mmahmoud95"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="hover:text-blue-400 transition-colors"
-                            aria-label="GitHub Profile"
-                        >
-                            <FaGithub size={24} />
-                        </Link>
-                    </div>
-                </div>
-
-                <div className="mt-8 text-center text-gray-400 text-sm">
-                    <p>
-                        © {new Date().getFullYear()} Mustafa Mahmoud. All rights
-                        reserved.
+        <footer className="border-t border-line bg-bg">
+            <div className="mx-auto flex max-w-6xl flex-col items-center gap-5 px-5 py-8 sm:flex-row sm:justify-between sm:px-8">
+                <div className="text-center sm:text-left">
+                    <p className="font-mono text-sm text-content">
+                        © 2025 Mustafa Mahmoud —{' '}
+                        <span className="text-muted">Front-end Developer</span>
+                    </p>
+                    <p className="comment mt-1 text-xs">
+                        {'// built with React, Next.js & Tailwind'}
                     </p>
                 </div>
+
+                <div className="flex gap-2">
+                    {SOCIALS.map((s) => (
+                        <Link
+                            key={s.label}
+                            href={s.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label={s.label}
+                            className="flex h-9 w-9 items-center justify-center rounded-lg border border-line text-muted transition-colors hover:border-accent hover:text-accent"
+                        >
+                            <s.icon size={16} />
+                        </Link>
+                    ))}
+                </div>
             </div>
-        </footer >
+        </footer>
     );
 };
 

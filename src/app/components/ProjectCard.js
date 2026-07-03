@@ -1,9 +1,6 @@
 'use client';
-import React from 'react';
 import Image from 'next/image';
-import { FaGithub, FaLink } from 'react-icons/fa';
-import Link from 'next/link';
-import { motion } from 'framer-motion';
+import { FiExternalLink, FiGithub } from 'react-icons/fi';
 
 const ProjectCard = ({
     title,
@@ -14,65 +11,61 @@ const ProjectCard = ({
     live_demo,
 }) => {
     return (
-        <motion.div
-            className="border-t-stone-950 border-t-[5px] border-solid rounded-2xl overflow-hidden shadow-md sm:shadow-2xl w-full sm:w-[275px] md:w-[325px] lg:w-[375px] poppins flex flex-col"
-            initial={{ opacity: 0, y: 50 }} // Initial state: invisible and moved down
-            whileInView={{ opacity: 1, y: 0 }} // Animates when in view: fully visible and reset to normal position
-            viewport={{ once: true, amount: 0.3 }} // Triggers animation once when 30% of the card is in view
-            transition={{ duration: 0.6 }} // Animation duration
-        >
-            {/* قسم الصورة */}
-            <div className="relative w-full h-48">
-                <Image fill className="object-cover" src={imgSrc} alt={title} />
+        <div className="card group flex h-full flex-col overflow-hidden transition-colors hover:border-accent">
+            {/* Screenshot */}
+            <div className="relative h-44 w-full overflow-hidden border-b border-line sm:h-48">
+                <Image
+                    src={imgSrc}
+                    alt={title}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 400px"
+                    className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]"
+                />
             </div>
 
-            {/* قسم المحتوى */}
-            <div className="flex-grow p-4 sm:px-7 sm:pt-5 sm:pb-3 flex flex-col justify-between">
-                <div>
-                    <h2 className="text-lg sm:text-2xl font-medium">{title}</h2>
-                    <p className="sm:text-base mt-1 dark-content line-clamp-5 mb-3 text-sm">
-                        {description}
-                    </p>
-                </div>
-                <div>
-                    <h3 className="solid-heading font-light">
-                        <span className="solid-heading font-normal sm:text-lg">
-                            Tech stack :{' '}
-                        </span>
-                        <span>
-                            {tags?.map((tag, index) => (
-                                <span key={index} className="text-sm">
-                                    {tag}
-                                    {index < tags.length - 1 ? ', ' : ''}
-                                </span>
-                            ))}
-                        </span>
+            {/* Content */}
+            <div className="flex flex-1 flex-col p-5">
+                <div className="flex items-center justify-between gap-3">
+                    <h3 className="font-display text-lg font-semibold text-content">
+                        {title}
                     </h3>
-                    <div className="flex items-center sm:gap-5 gap-2 mt-5 mb-3 text-xs sm:text-base">
-                        <p className="flex items-center gap-2">
-                            <FaLink />{' '}
-                            <a
-                                className="underline"
-                                target="_blank"
-                                href={live_demo}
-                            >
-                                Live Preview
-                            </a>
-                        </p>
-                        <p className="flex items-center gap-2">
-                            <FaGithub />{' '}
-                            <Link
-                                href={source_code}
-                                target="_blank"
-                                className="underline"
-                            >
-                                View Code
-                            </Link>
-                        </p>
-                    </div>
+                    <span className="font-mono text-xs text-muted">
+                        {'~/projects'}
+                    </span>
+                </div>
+
+                <p className="mt-1.5 text-sm leading-relaxed text-muted">
+                    {description}
+                </p>
+
+                <div className="mt-4 flex flex-wrap gap-2">
+                    {tags.map((tag) => (
+                        <span key={tag} className="chip">
+                            {tag}
+                        </span>
+                    ))}
+                </div>
+
+                <div className="mt-5 flex items-center gap-4 border-t border-line pt-4">
+                    <a
+                        href={live_demo}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 font-mono text-sm text-content transition-colors hover:text-accent"
+                    >
+                        <FiExternalLink size={15} /> Live Preview
+                    </a>
+                    <a
+                        href={source_code}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 font-mono text-sm text-muted transition-colors hover:text-accent"
+                    >
+                        <FiGithub size={15} /> View Code
+                    </a>
                 </div>
             </div>
-        </motion.div>
+        </div>
     );
 };
 
