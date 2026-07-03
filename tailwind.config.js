@@ -5,47 +5,51 @@ module.exports = {
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
-  darkMode: "media",
+  darkMode: "selector",
   theme: {
     extend: {
       colors: {
-        bg: {
-          DEFAULT: "var(--color-bg)",
-          secondary: "var(--color-bg-secondary)",
-          tertiary: "var(--color-bg-tertiary)",
-        },
-        surface: {
-          DEFAULT: "var(--color-surface)",
-          hover: "var(--color-surface-hover)",
-        },
+        bg: "var(--bg)",
+        surface: "var(--surface)",
+        elevated: "var(--elevated)",
+        content: "var(--text)",
+        muted: "var(--muted)",
+        accent: "var(--accent)",
+        "accent-soft": "var(--accent-soft)",
+        line: "var(--border)",
+        ok: "var(--ok)",
       },
       fontFamily: {
-        sans: ["var(--font-dm-sans)", "system-ui", "sans-serif"],
-        display: ["var(--font-poppins)", "system-ui", "sans-serif"],
+        mono: ["var(--font-mono)", "ui-monospace", "monospace"],
+        sans: ["var(--font-sans)", "system-ui", "sans-serif"],
+        display: ["var(--font-display)", "system-ui", "sans-serif"],
+      },
+      borderRadius: {
+        xl: "12px",
+        "2xl": "14px",
       },
       boxShadow: {
-        "glow-violet": "0 0 30px rgba(139,92,246,0.3)",
-        "glow-cyan": "0 0 30px rgba(34,211,238,0.3)",
-        "glow-sm": "0 0 15px rgba(139,92,246,0.15)",
-        card: "0 4px 24px rgba(0,0,0,0.6)",
-      },
-      animation: {
-        float: "float 6s ease-in-out infinite",
-        "float-slow": "float 9s ease-in-out infinite",
-        "pulse-glow": "pulseGlow 2.5s ease-in-out infinite",
-        "spin-slow": "spin 12s linear infinite",
-        marquee: "marquee 30s linear infinite",
-        "ping-slow": "ping 2.5s cubic-bezier(0,0,0.2,1) infinite",
+        soft: "0 1px 2px rgba(0,0,0,0.04), 0 8px 24px -12px rgba(0,0,0,0.25)",
       },
       keyframes: {
-        float: {
-          "0%, 100%": { transform: "translateY(0px)" },
-          "50%": { transform: "translateY(-12px)" },
+        blink: {
+          "0%, 100%": { opacity: "1" },
+          "50%": { opacity: "0" },
         },
-        pulseGlow: {
-          "0%, 100%": { boxShadow: "0 0 12px rgba(139,92,246,0.3)" },
-          "50%": { boxShadow: "0 0 28px rgba(139,92,246,0.6)" },
+        pulseDot: {
+          "0%": { boxShadow: "0 0 0 0 var(--accent-soft)" },
+          "70%": { boxShadow: "0 0 0 8px transparent" },
+          "100%": { boxShadow: "0 0 0 0 transparent" },
         },
+        fadeUp: {
+          "0%": { opacity: "0", transform: "translateY(12px)" },
+          "100%": { opacity: "1", transform: "translateY(0)" },
+        },
+      },
+      animation: {
+        blink: "blink 1.1s step-end infinite",
+        pulseDot: "pulseDot 2s ease-out infinite",
+        fadeUp: "fadeUp 0.6s ease forwards",
       },
     },
   },
